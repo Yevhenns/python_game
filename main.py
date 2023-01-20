@@ -1,5 +1,5 @@
 import pygame
-from pygame.constants import QUIT
+from pygame.constants import QUIT, K_DOWN
 import random
 
 pygame.init()
@@ -25,15 +25,11 @@ while is_working:
 
     ball_rect = ball_rect.move(ball_speed)
 
-    if ball_rect.bottom >= height or ball_rect.top <= 0:
-        ball_speed[1] = -ball_speed[1]
-        ball.fill((random.randint(0, 255), random.randint(
-            0, 255), random.randint(0, 255)))
-    if ball_rect.right >= width or ball_rect.left <= 0:
-        ball_speed[0] = -ball_speed[0]
-        ball.fill((random.randint(0, 255), random.randint(
-            0, 255), random.randint(0, 255)))
+    pressed_keys = pygame.key.get_pressed()
+
     main_surface.fill(BLACK)
     main_surface.blit(ball, ball_rect)
+
+    if pressed_keys[K_DOWN]
 
     pygame.display.flip()
