@@ -10,6 +10,7 @@ screen = width, height = 800, 600
 BLACK = 0, 0, 0
 WHITE = 255, 255, 255
 RED = 255, 0, 0
+GREEN = 0, 255, 0
 
 main_surface = pygame.display.set_mode(screen)
 
@@ -30,18 +31,18 @@ def create_enemy():
 
 def create_bonus():
     bonus = pygame.Surface((20, 20))
-    bonus.fill(WHITE)
+    bonus.fill(GREEN)
     bonus_rect = pygame.Rect(random.randint(
-        0, width), 20, *bonus.get_size())
-    bonus_speed = random.randint(2, 5)
+        0, width), 0, *bonus.get_size())
+    bonus_speed = random.randint(4, 6)
     return [bonus, bonus_rect, bonus_speed]
 
 
 CREATE_ENEMY = pygame.USEREVENT + 1
 pygame.time.set_timer(CREATE_ENEMY, 1500)
 
-CREATE_BONUS = pygame.USEREVENT + 1
-pygame.time.set_timer(CREATE_BONUS, 1500)
+CREATE_BONUS = pygame.USEREVENT + 2
+pygame.time.set_timer(CREATE_BONUS, 2500)
 
 enemies = []
 bonuses = []
@@ -81,9 +82,6 @@ while is_working:
         main_surface.blit(bonus[0], bonus[1])
 
         if bonus[1].bottom >= height:
-            bonuses.pop(bonuses.index(bonus))
-
-        if ball_rect.colliderect(bonus[1]):
             bonuses.pop(bonuses.index(bonus))
 
     if pressed_keys[K_DOWN] and not ball_rect.bottom >= height:
