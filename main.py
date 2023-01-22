@@ -84,7 +84,7 @@ while is_working:
 
     main_surface.blit(player, player_rect)
 
-    main_surface.blit(font.render(str(scores), True, WHITE), (width - 30, 0))
+    main_surface.blit(font.render(str(scores), True, RED), (width - 30, 0))
 
     for enemy in enemies:
         enemy[1] = enemy[1].move(-enemy[2], 0)
