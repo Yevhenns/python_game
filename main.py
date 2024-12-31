@@ -1,9 +1,10 @@
 import pygame
-import random
 from pygame.constants import QUIT, K_DOWN, K_UP, K_LEFT, K_RIGHT
 from utils.colors import RED
 from utils.settings import  SCREEN_WIDTH, SCREEN_HEIGHT
 from components.player import player, player_rect, player_speed 
+from components.create_enemy import create_enemy
+from components.create_bonus import create_bonus
 
 pygame.init()
 
@@ -13,24 +14,6 @@ screen = width, height = SCREEN_WIDTH, SCREEN_HEIGHT
 font = pygame.font.SysFont('Verdana', 20)
 
 main_surface = pygame.display.set_mode(screen)
-
-def create_enemy():
-    enemy = pygame.transform.scale(pygame.image.load(
-        'assets/images/enemy.png').convert_alpha(), (150, 50))
-    enemy_rect = pygame.Rect(
-        width, random.randint(0, height), *enemy.get_size())
-    enemy_speed = random.randint(2, 5)
-    return [enemy, enemy_rect, enemy_speed]
-
-
-def create_bonus():
-    bonus = pygame.transform.scale(
-        pygame.image.load('assets/images/bonus.png').convert_alpha(), (100, 150))
-    bonus_rect = pygame.Rect(random.randint(
-        0, width), 0, *bonus.get_size())
-    bonus_speed = random.randint(4, 6)
-    return [bonus, bonus_rect, bonus_speed]
-
 
 bg = pygame.transform.scale(pygame.image.load(
     'assets/images/background.png').convert(), screen)
@@ -58,9 +41,9 @@ while is_working:
         if event.type == QUIT:
             is_working = False
         if event.type == CREATE_ENEMY:
-            enemies.append((create_enemy()))
+            enemies.append((create_enemy(width, height)))
         if event.type == CREATE_BONUS:
-            bonuses.append((create_bonus()))
+            bonuses.append((create_bonus(width)))
 
     pressed_keys = pygame.key.get_pressed()
 
