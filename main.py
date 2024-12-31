@@ -1,29 +1,26 @@
 import pygame
 from pygame.constants import QUIT, K_DOWN, K_UP, K_LEFT, K_RIGHT
 import random
+from utils.colors import RED
+from utils.settings import  SCREEN_WIDTH, SCREEN_HEIGHT
 
 pygame.init()
 
 FPS = pygame.time.Clock()
-screen = width, height = 800, 600
-
-BLACK = 0, 0, 0
-WHITE = 255, 255, 255
-RED = 255, 0, 0
-GREEN = 0, 255, 0
+screen = width, height = SCREEN_WIDTH, SCREEN_HEIGHT
 
 font = pygame.font.SysFont('Verdana', 20)
 
 main_surface = pygame.display.set_mode(screen)
 
-player = pygame.image.load('player.png').convert_alpha()
+player = pygame.image.load('./assets/images/player.png').convert_alpha()
 player_rect = player.get_rect()
 player_speed = 4
 
 
 def create_enemy():
     enemy = pygame.transform.scale(pygame.image.load(
-        'enemy.png').convert_alpha(), (150, 50))
+        'assets/images/enemy.png').convert_alpha(), (150, 50))
     enemy_rect = pygame.Rect(
         width, random.randint(0, height), *enemy.get_size())
     enemy_speed = random.randint(2, 5)
@@ -32,7 +29,7 @@ def create_enemy():
 
 def create_bonus():
     bonus = pygame.transform.scale(
-        pygame.image.load('bonus.png').convert_alpha(), (100, 150))
+        pygame.image.load('assets/images/bonus.png').convert_alpha(), (100, 150))
     bonus_rect = pygame.Rect(random.randint(
         0, width), 0, *bonus.get_size())
     bonus_speed = random.randint(4, 6)
@@ -40,7 +37,7 @@ def create_bonus():
 
 
 bg = pygame.transform.scale(pygame.image.load(
-    'background.png').convert(), screen)
+    'assets/images/background.png').convert(), screen)
 bgX = 0
 bgX2 = bg.get_width()
 bg_speed = 3
