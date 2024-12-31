@@ -7,13 +7,11 @@ from components.create_enemy import create_enemy
 from components.create_bonus import create_bonus
 
 pygame.init()
-
-FPS = pygame.time.Clock()
 screen = width, height = SCREEN_WIDTH, SCREEN_HEIGHT
-
-font = pygame.font.SysFont('Verdana', 20)
-
 main_surface = pygame.display.set_mode(screen)
+clock = pygame.time.Clock()
+font = pygame.font.SysFont('Verdana', 20)
+is_working = True
 
 bg = pygame.transform.scale(pygame.image.load(
     'assets/images/background.png').convert(), screen)
@@ -31,11 +29,9 @@ scores = 0
 enemies = []
 bonuses = []
 
-is_working = True
-
 while is_working:
 
-    FPS.tick(60)
+    clock.tick(60)
 
     for event in pygame.event.get():
         if event.type == QUIT:
