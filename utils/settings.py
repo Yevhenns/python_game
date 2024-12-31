@@ -1,0 +1,5 @@
+# general
+SCREEN_WIDTH = 1366
+SCREEN_HEIGHT = 768
+# palyer
+PLAYER_SPEED = 4

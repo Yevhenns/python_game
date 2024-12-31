@@ -1,46 +1,20 @@
 import pygame
 from pygame.constants import QUIT, K_DOWN, K_UP, K_LEFT, K_RIGHT
-import random
+from utils.colors import RED
+from utils.settings import  SCREEN_WIDTH, SCREEN_HEIGHT
+from components.player import player, player_rect, player_speed 
+from components.create_enemy import create_enemy
+from components.create_bonus import create_bonus
 
 pygame.init()
-
-FPS = pygame.time.Clock()
-screen = width, height = 800, 600
-
-BLACK = 0, 0, 0
-WHITE = 255, 255, 255
-RED = 255, 0, 0
-GREEN = 0, 255, 0
-
-font = pygame.font.SysFont('Verdana', 20)
-
+screen = width, height = SCREEN_WIDTH, SCREEN_HEIGHT
 main_surface = pygame.display.set_mode(screen)
-
-player = pygame.image.load('player.png').convert_alpha()
-player_rect = player.get_rect()
-player_speed = 4
-
-
-def create_enemy():
-    enemy = pygame.transform.scale(pygame.image.load(
-        'enemy.png').convert_alpha(), (150, 50))
-    enemy_rect = pygame.Rect(
-        width, random.randint(0, height), *enemy.get_size())
-    enemy_speed = random.randint(2, 5)
-    return [enemy, enemy_rect, enemy_speed]
-
-
-def create_bonus():
-    bonus = pygame.transform.scale(
-        pygame.image.load('bonus.png').convert_alpha(), (100, 150))
-    bonus_rect = pygame.Rect(random.randint(
-        0, width), 0, *bonus.get_size())
-    bonus_speed = random.randint(4, 6)
-    return [bonus, bonus_rect, bonus_speed]
-
+clock = pygame.time.Clock()
+font = pygame.font.SysFont('Verdana', 20)
+is_working = True
 
 bg = pygame.transform.scale(pygame.image.load(
-    'background.png').convert(), screen)
+    'assets/images/background.png').convert(), screen)
 bgX = 0
 bgX2 = bg.get_width()
 bg_speed = 3
@@ -55,19 +29,17 @@ scores = 0
 enemies = []
 bonuses = []
 
-is_working = True
-
 while is_working:
 
-    FPS.tick(60)
+    clock.tick(60)
 
     for event in pygame.event.get():
         if event.type == QUIT:
             is_working = False
         if event.type == CREATE_ENEMY:
-            enemies.append((create_enemy()))
+            enemies.append((create_enemy(width, height)))
         if event.type == CREATE_BONUS:
-            bonuses.append((create_bonus()))
+            bonuses.append((create_bonus(width)))
 
     pressed_keys = pygame.key.get_pressed()
 
