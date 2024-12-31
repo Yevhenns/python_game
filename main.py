@@ -1,8 +1,9 @@
 import pygame
-from pygame.constants import QUIT, K_DOWN, K_UP, K_LEFT, K_RIGHT
 import random
+from pygame.constants import QUIT, K_DOWN, K_UP, K_LEFT, K_RIGHT
 from utils.colors import RED
 from utils.settings import  SCREEN_WIDTH, SCREEN_HEIGHT
+from components.player import player, player_rect, player_speed 
 
 pygame.init()
 
@@ -12,11 +13,6 @@ screen = width, height = SCREEN_WIDTH, SCREEN_HEIGHT
 font = pygame.font.SysFont('Verdana', 20)
 
 main_surface = pygame.display.set_mode(screen)
-
-player = pygame.image.load('./assets/images/player.png').convert_alpha()
-player_rect = player.get_rect()
-player_speed = 4
-
 
 def create_enemy():
     enemy = pygame.transform.scale(pygame.image.load(
