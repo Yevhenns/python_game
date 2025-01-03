@@ -6,5 +6,5 @@ def create_enemy(width, height):
         'assets/images/enemy.png').convert_alpha(), (150, 50))
     enemy_rect = pygame.Rect(
         width, random.randint(0, height), *enemy.get_size())
-    enemy_speed = random.randint(2, 5)
+    enemy_speed = random.randint(5, 15)
     return [enemy, enemy_rect, enemy_speed]

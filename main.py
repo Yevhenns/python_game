@@ -12,6 +12,8 @@ main_surface = pygame.display.set_mode(screen)
 clock = pygame.time.Clock()
 font = pygame.font.SysFont('Verdana', 20)
 is_working = True
+pygame.mixer.music.load('assets/music/bg-music.mp3')
+pygame.mixer.music.play(-1)
 
 bg = pygame.transform.scale(pygame.image.load(
     'assets/images/background.png').convert(), screen)
